@@ -1,0 +1,92 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.multipart.saveDir" value="/home/plasante/Downloads/temp" />
+    <constant name="struts.multipart.maxSize" value="2000000" />
+    
+    <include file="example.xml"/>
+    <!-- Configuration for the default package. -->
+    <package name="helloworld" extends="struts-default">
+
+        <interceptors>
+            <interceptor name="myinterceptor" class="com.uniksoft.struts2.MyInterceptor"/>
+        </interceptors>
+        
+        <action name="index">
+            <result>/index.jsp</result>
+        </action>
+        
+        <action name="student">
+            <result>/jsp/student.jsp</result>
+        </action>
+        
+        <action name="hello"
+            class="com.uniksoft.struts2.HelloWorldAction"
+            method="execute">
+            <interceptor-ref name="params"/>
+            <interceptor-ref name="timer" />
+            <interceptor-ref name="myinterceptor" />
+            <result name="success">/jsp/HelloWorld.jsp</result>
+            <result name="error" type="freemarker">
+                <param name="location">/hello.fm</param>
+            </result>
+        </action>
+        
+        <action name="helloOGNL" class="com.uniksoft.struts2.HelloWorldOGNLAction" method="execute">
+            <interceptor-ref name="timer" />
+            <result name="success">/jsp/HelloWorldOGNL.jsp</result>
+        </action>
+        
+        <action name="upload" class="com.uniksoft.struts2.uploadFile">
+            <interceptor-ref name="fileUpload"/>
+            <interceptor-ref name="basicStack"/>
+            <result name="success">/jsp/successupload.jsp</result>
+            <result name="error">/jsp/errorupload.jsp</result>
+        </action>
+        
+        <action name="loginaction"
+                class="com.uniksoft.struts2.LoginAction"
+                method="execute">
+                <result name="success">/jsp/successlogin.jsp</result>
+                <result name="error">/jsp/errorlogin.jsp</result>
+        </action>
+        
+        <action name="empinfo"
+                class="com.uniksoft.struts2.Employee"
+                method="execute">
+                <result name="input">/jsp/menu.jsp</result>
+                <result name="success">/jsp/successemp.jsp</result>
+        </action>
+        
+        <action name="system"
+                class="com.uniksoft.struts2.SystemDetails"
+                method="execute">
+                <result name="success">/jsp/system.jsp</result>
+        </action>
+        
+        <action name="add_Student" method="execute"
+                class="com.uniksoft.struts2.AddStudentAction">
+                <result name="success">/jsp/student.jsp</result>
+        </action>
+        
+        <action name="addStudent" method="execute"
+                class="com.uniksoft.struts2.AddStudentAction">
+                <result name="success" type="redirect">
+                    listStudents
+                </result>
+        </action>
+        
+        <action name="listStudents" method="listStudents"
+                class="com.uniksoft.struts2.AddStudentAction">
+                <result name="success">/jsp/student.jsp</result>
+        </action>
+        
+        <action name="listStudentsByFirstName" method="listStudentsByFirstName"
+                class="com.uniksoft.struts2.AddStudentAction">
+                <result name="success">/jsp/student.jsp</result>
+        </action>
+    </package>
+</struts>
