@@ -23,6 +23,44 @@
             <result>/jsp/student.jsp</result>
         </action>
         
+        <action name="contacts">
+            <result>/jsp/contacts.jsp</result>
+        </action>
+        
+        <action name="addContact"
+                class="com.uniksoft.controller.ContactAction"
+                method="execute">
+                <result name="success" type="redirect">
+                    listContacts
+                </result>
+                <result name="error">/jsp/contacts.jsp</result>
+        </action>
+        
+        <action name="deleteContact"
+                class="com.uniksoft.controller.ContactAction"
+                method="delete">
+                <result type="redirect">
+                    listContacts
+                </result>
+        </action>
+        
+        <action name="editContact" method="getContactObj"
+                class="com.uniksoft.controller.ContactAction">
+            <result name="success">/jsp/contactedit.jsp</result>
+        </action>
+        
+        <action name="updateContact" method="updateContact"
+                class="com.uniksoft.controller.ContactAction">
+            <result type="redirect">
+                listContacts
+            </result>
+        </action>
+        
+        <action name="listContacts" method="listContacts"
+                class="com.uniksoft.controller.ContactAction">
+                <result name="success">/jsp/contacts.jsp</result>
+        </action>
+        
         <action name="hello"
             class="com.uniksoft.struts2.HelloWorldAction"
             method="execute">

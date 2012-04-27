@@ -10,5 +10,6 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="com.uniksoft.struts2.Student" />
+    <mapping class="com.uniksoft.model.Contact" />
   </session-factory>
 </hibernate-configuration>
